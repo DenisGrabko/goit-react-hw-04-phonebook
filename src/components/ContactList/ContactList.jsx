@@ -18,7 +18,7 @@ const ContactList = ({ filteredContacts, onDeleteContact }) => {
         <Title>Contacts ({filteredContacts.length})</Title>
         {filteredContacts.length > 0 ? (
           <List>
-            {filteredContacts.map(contact => (
+            {filteredContacts.map((contact) => (
               <ContactItem
                 key={contact.id}
                 onDeleteContact={onDeleteContact}
@@ -34,12 +34,12 @@ const ContactList = ({ filteredContacts, onDeleteContact }) => {
   );
 };
 
-ContactItem.propTypes = {
+ContactList.propTypes = {
   filteredContacts: PropTypes.arrayOf(
     PropTypes.shape({
       bgColor: PropTypes.string.isRequired,
       color: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       number: PropTypes.string.isRequired,
     })
