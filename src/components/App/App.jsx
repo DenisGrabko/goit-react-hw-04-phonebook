@@ -8,20 +8,15 @@ import ContactForm from '../ContactForm/ContactForm';
 import ContactList from '../ContactList/ContactList';
 
 const App = () => {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(JSON.parse(localStorage.getItem('contacts')) || []);
   const [filter, setFilter] = useState('');
-
-  useEffect(() => {
-    const localData = localStorage.getItem('contacts');
-    if (localData) setContacts(JSON.parse(localData));
-  }, []);
 
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
   const onAddContact = ({ name, number }) => {
-    const isExist = contacts.some((contact) => contact.name === name);
+    const isExist = contacts.some((contact) => contact.name.toLowerCase() === name.toLowerCase());
 
     if (isExist) {
       alert(`${name} is already in contacts.`);

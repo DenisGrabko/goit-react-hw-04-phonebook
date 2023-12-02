@@ -9,13 +9,24 @@ const ContactForm = ({ onAddContact }) => {
   const [number, setNumber] = useState('')
 
 
- const handleNameChange = (event) => {
-    const newName = event.target.value.replace(/[^a-zA-Zа-яА-ЯіІʼ\s-]/g, '');
-    setName(newName);
-  };
 
-  const handleNumberChange = (event) => {
-    setNumber(event.target.value);
+
+  const handleChange = (event) => {
+    let { name, value } = event.target;
+
+    switch (name) {      
+      case 'name':
+        const newName = event.target.value.replace(/[^a-zA-Zа-яА-ЯіІʼ\s-]/g, '');
+        setName(newName);
+        break;
+
+      case 'number':
+        setNumber(value);
+        break;
+      
+      default:
+        break;
+    }
   };
 
   const handleAddContact = (event) => {
@@ -24,8 +35,6 @@ const ContactForm = ({ onAddContact }) => {
     setName('');
     setNumber('');
   };
-  
-  
   
     return (
       <Form onSubmit={handleAddContact}>
@@ -36,7 +45,7 @@ const ContactForm = ({ onAddContact }) => {
           size="small"
           name="name"
           value={name}
-          onChange={handleNameChange}
+          onChange={handleChange}
           style={{ marginBottom: '40px' }}
           required
         />
@@ -47,7 +56,7 @@ const ContactForm = ({ onAddContact }) => {
           size="small"
           name="number"
           value={number}
-          onChange={handleNumberChange}
+          onChange={handleChange}
           style={{ marginBottom: '10px' }}
           required
         />
